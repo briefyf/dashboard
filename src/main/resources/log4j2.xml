@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- status="OFF"，可以去掉，它的含义为是否记录log4j2本身的event信息，默认是OFF -->
+<Configuration status="warn">
+
+    <Properties>
+        <property name="filename">../logs/scheduler.log</property>
+        <property name="rfilename">../logs/scheduler%d{yyyy-MM-dd}.log</property>
+        <property name="pattern">[%d] (%F\:%L) %-5p - %m%n</property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+        <RollingFile name="R" fileName="${filename}" filePattern="${rfilename}">
+            <PatternLayout>
+                <Pattern>${pattern}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!-- <SizeBasedTriggeringPolicy size="250 MB"/> -->
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="R"/>
+        </Root>
+
+        <Logger name="org.mybatis.caches.redis.RedisCache" level="debug"></Logger>
+
+        <Logger name="org.springframework.web" level="info"></Logger>
+        <Logger name="org.springframework.transaction" level="debug"></Logger>
+
+    </Loggers>
+</Configuration>
