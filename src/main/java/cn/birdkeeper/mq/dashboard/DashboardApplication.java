@@ -34,7 +34,6 @@ public class DashboardApplication {
 		if (args.length > 0) {
 			profile = args[0];
 		}
-		System.out.println("profile is --->:" + profile);
 		System.setProperty("profile",profile);
 		SpringApplication.run(DashboardApplication.class, args);
 	}
