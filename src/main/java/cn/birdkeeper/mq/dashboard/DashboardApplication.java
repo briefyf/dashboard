@@ -35,6 +35,6 @@ public class DashboardApplication {
 			profile = args[0];
 		}
 		System.setProperty("profile",profile);
-		SpringApplication.run(DashboardApplication.class, args);
+		SpringApplication.run(DashboardApplication.class, args).close();
 	}
 }
